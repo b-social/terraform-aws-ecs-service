@@ -1,6 +1,7 @@
 resource "aws_ecs_service" "service_with_lb" {
+
   count = var.attach_to_load_balancer == "yes" ? 1 : 0
-  name = var.service_name
+  name_prefix = var.service_name
   cluster = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.service.arn
   desired_count = var.service_desired_count
@@ -24,6 +25,10 @@ resource "aws_ecs_service" "service_with_lb" {
     target_group_arn = var.target_group_arn
     container_name = coalesce(var.target_container_name, var.service_name)
     container_port = coalesce(var.target_port, var.service_port)
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
