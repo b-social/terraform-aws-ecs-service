@@ -31,6 +31,12 @@ variable "service_name" {
   description = "The name of the service being created."
   type = string
 }
+
+variable "service_name_suffix" {
+  description = "Suffix to be appened to the name of the service being created."
+  type = string
+  default = ""
+}
 variable "service_image" {
   description = "The docker image (including version) to deploy."
   default = ""

@@ -1,7 +1,7 @@
 resource "aws_ecs_service" "service_with_lb" {
 
   count = var.attach_to_load_balancer == "yes" ? 1 : 0
-  name = var.service_name
+  name = "${var.service_name}${var.service_name_suffix}"
   cluster = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.service.arn
   desired_count = var.service_desired_count
