@@ -14,6 +14,10 @@ resource "aws_ecs_service" "service" {
 
   force_new_deployment = local.force_new_deployment == "yes"
 
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
+
   dynamic "network_configuration" {
     for_each = local.service_task_network_mode == "awsvpc" ? [local.subnet_ids] : []
 
