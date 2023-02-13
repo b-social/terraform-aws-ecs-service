@@ -23,7 +23,16 @@ resource "aws_ecs_task_definition" "service" {
     for_each = var.service_volumes
     content {
       name = volume.value.name
-      host_path = volume.value.host_path
+      host_path = lookup(volume.value, "host_path", null)
+      docker_volume_configuration {
+        scope         = "shared"
+        autoprovision = true
+        driver        = "rexray/ebs"
+        driver_opts = {
+          volumetype = "gp2"
+          size       = 1000
+        }
+      }
     }
   }
 }
