@@ -173,7 +173,6 @@ variable "service_role" {
 }
 variable "service_volumes" {
   description = "A list of volumes to make available to the containers in the service."
-  type        = list(map(string))
   default     = []
 }
 
