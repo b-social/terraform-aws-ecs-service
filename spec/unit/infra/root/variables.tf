@@ -46,7 +46,6 @@ variable "service_role" {
   default = null
 }
 variable "service_volumes" {
-  type = list(map(string))
   default = null
 }
 
