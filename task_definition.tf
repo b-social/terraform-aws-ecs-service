@@ -27,12 +27,12 @@ resource "aws_ecs_task_definition" "service" {
       dynamic "docker_volume_configuration" {
         for_each = [volume.value.docker_volume_configuration]
         content {
-          scope         = volume.value.docker_volume_configuration.scope
-          autoprovision = volume.value.docker_volume_configuration.autoprovision
-          driver        = volume.value.docker_volume_configuration.driver
+          scope         = docker_volume_configuration.value.docker_volume_configuration.scope
+          autoprovision = docker_volume_configuration.value.autoprovision
+          driver        = docker_volume_configuration.value.driver
           driver_opts   = {
-            volumetype = volume.value.docker_volume_configuration.volumetype
-            size       = volume.value.docker_volume_configuration.size
+            volumetype = docker_volume_configuration.value.volumetype
+            size       = docker_volume_configuration.value.size
           }
         }
       }
