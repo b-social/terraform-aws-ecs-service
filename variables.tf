@@ -84,7 +84,11 @@ variable "service_role" {
 }
 variable "service_volumes" {
   description = "A list of volumes to make available to the containers in the service."
-  type = list(map(string))
+  type = list(object({
+    name = string
+    host_path = optional(string)
+    docker_volume_configuration = optional(object({}))
+  }))
   default = []
 }
 

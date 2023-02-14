@@ -19,15 +19,22 @@ resource "aws_ecs_task_definition" "service" {
 
   task_role_arn = var.service_role
 
-  volume {
-    name = var.volume_name
-    docker_volume_configuration {
-      scope         = "shared"
-      autoprovision = true
-      driver        = "rexray/ebs"
-      driver_opts = {
-        volumetype = "gp2"
-        size       = 1000
+  dynamic "volume" {
+    for_each = var.service_volumes
+    content {
+      name = volume.value.name
+      host_path = lookup(volume.value, "host_path", null)
+      dynamic "docker_volume_configuration" {
+        for_each = volume.value.docker_volume_configuration
+        content {
+          scope         = docker_volume_configuration.value["scope"]
+          autoprovision = docker_volume_configuration.value["autoprovision"]
+          driver        = docker_volume_configuration.value["driver"]
+          driver_opts = {
+            volumetype = docker_volume_configuration.value["volumetype"]
+            size       = docker_volume_configuration.value["size"]
+          }
+        }
       }
     }
   }
