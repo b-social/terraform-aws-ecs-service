@@ -118,5 +118,3 @@ variable "ecs_cluster_service_role_arn" {
   description = "The ARN of the IAM role to provide to ECS to manage the service."
   type = string
 }
-
-variable "volume_name" {}
