@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "service" {
       dynamic "docker_volume_configuration" {
         for_each = [volume.value.docker_volume_configuration]
         content {
-          scope         = docker_volume_configuration.value.docker_volume_configuration.scope
+          scope         = docker_volume_configuration.value.scope
           autoprovision = docker_volume_configuration.value.autoprovision
           driver        = docker_volume_configuration.value.driver
           driver_opts   = {
