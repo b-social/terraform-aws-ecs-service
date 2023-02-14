@@ -87,13 +87,7 @@ variable "service_volumes" {
   type = list(object({
     name = string
     host_path = string
-    docker_volume_configuration = object({
-      scope         = string
-      autoprovision = string
-      driver        = string
-      volumetype    = string
-      size          = number
-    })
+    docker_volume_configuration = object({})
   }))
   default = []
 }
