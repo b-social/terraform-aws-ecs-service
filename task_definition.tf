@@ -24,13 +24,16 @@ resource "aws_ecs_task_definition" "service" {
     content {
       name = volume.value.name
       host_path = lookup(volume.value, "host_path", null)
-      docker_volume_configuration {
-        scope         = volume.value.docker_volume_configuration.scope
-        autoprovision = volume.value.docker_volume_configuration.autoprovision
-        driver        = volume.value.docker_volume_configuration.driver
-        driver_opts   = {
-          volumetype = volume.value.docker_volume_configuration.volumetype
-          size       = volume.value.docker_volume_configuration.size
+      dynamic "docker_volume_configuration" {
+        for_each = [volume.value.docker_volume_configuration]
+        content {
+          scope         = volume.value.docker_volume_configuration.scope
+          autoprovision = volume.value.docker_volume_configuration.autoprovision
+          driver        = volume.value.docker_volume_configuration.driver
+          driver_opts   = {
+            volumetype = volume.value.docker_volume_configuration.volumetype
+            size       = volume.value.docker_volume_configuration.size
+          }
         }
       }
     }
