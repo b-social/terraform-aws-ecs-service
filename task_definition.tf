@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "service" {
       host_path = lookup(volume.value, "host_path", null)
       docker_volume_configuration {
         scope         = lookup(volume.value.docker_volume_configuration, "scope", null)
-        autoprovision = lookup(volume.value.docker_volume_configuration, "scope", null)
+        autoprovision = lookup(volume.value.docker_volume_configuration, "autoprovision", null)
         driver        = lookup(volume.value.docker_volume_configuration, "driver", null)
         driver_opts   = {
           volumetype = lookup(volume.value.docker_volume_configuration, "volumetype", null)
