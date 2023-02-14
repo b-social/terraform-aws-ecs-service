@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "service" {
       name = volume.value.name
       host_path = lookup(volume.value, "host_path", null)
       dynamic "docker_volume_configuration" {
-        for_each = volume.value.docker_volume_configuration ? [volume.value.docker_volume_configuration] : []
+        for_each = volume.value.docker_volume_configuration != null ? [volume.value.docker_volume_configuration] : []
         content {
           scope         = docker_volume_configuration.value["scope"]
           autoprovision = docker_volume_configuration.value["autoprovision"]
