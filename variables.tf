@@ -87,7 +87,7 @@ variable "service_volumes" {
   type = list(object({
     name = string
     host_path = string
-    docker_volume_configuration = object({})
+    docker_volume_configuration = list(object({}))
   }))
   default = []
 }
