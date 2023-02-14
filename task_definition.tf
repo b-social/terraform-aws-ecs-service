@@ -25,12 +25,12 @@ resource "aws_ecs_task_definition" "service" {
       name = volume.value.name
       host_path = lookup(volume.value, "host_path", null)
       docker_volume_configuration {
-        scope         = volume.value.docker_volume_configuration.scope
-        autoprovision = volume.value.docker_volume_configuration.autoprovision
-        driver        = volume.value.docker_volume_configuration.driver
+        scope         = lookup(volume.value.docker_volume_configuration.scope, "scope" null)
+        autoprovision = lookup(volume.value.docker_volume_configuration.autoprovision, "scope", null)
+        driver        = lookup(volume.value.docker_volume_configuration.driver, "driver", null)
         driver_opts   = {
-          volumetype = volume.value.docker_volume_configuration.volumetype
-          size       = volume.value.docker_volume_configuration.size
+          volumetype = lookup(volume.value.docker_volume_configuration.volumetype, "volumetype", null)
+          size       = lookup(volume.value.docker_volume_configuration.size, "size", null)
         }
       }
     }
