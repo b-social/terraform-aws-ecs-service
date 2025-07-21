@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'awspec'
+gem 'awspec', '>= 1.29.0'
 gem 'confidante'
 gem 'git'
 gem 'nokogiri'
