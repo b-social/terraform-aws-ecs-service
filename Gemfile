@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'awspec'
 gem 'confidante'
 gem 'git'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.19.3'
 gem 'rake'
 gem 'rake_circle_ci'
 gem 'rake_github'
@@ -18,3 +18,9 @@ gem 'rubocop'
 gem 'rubocop-rake'
 gem 'rubocop-rspec'
 gem 'semantic'
+
+gem 'rspec-its', '>= 2.0.0'
+
+gem 'rexml', '>= 3.3.9'
+
+gem 'faraday', '>= 2.14.2'
